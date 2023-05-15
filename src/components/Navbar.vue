@@ -8,6 +8,7 @@
                     <navbar-link
                     :page="page"
                     :isActive ="activePage === index"
+                    @click.prevent="navLinkClick(index)"
                     ></navbar-link>
                     <!-- <a class="nav-link" :class="{active: activePage == index}" aria-current="page" :href="page.link.url"
                         :title="`This link goes to the ${page.link.text} page`"
@@ -25,7 +26,11 @@
 </template>
 
 <script>
+import NavbarLink from './NavbarLink.vue';
 export default {
+    components: {
+        NavbarLink,
+    },
     props: ["pages", "activePage", "navLinkClick"],
     data() {
         return {
