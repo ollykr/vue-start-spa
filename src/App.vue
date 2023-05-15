@@ -1,3 +1,4 @@
+<!-- Note : Pages is a data we want dynamically load -->
 <template>
  <navbar
   			:pages="pages"
@@ -20,31 +21,32 @@ export default
       Navbar,
       PageViewer
     },
+    // Lifecycle events
+    // 'created' option
+    created() {
+      this.getPages();
+    },
     // Data option
     data() {
       // The code below initialises our data only, it is not setting the data to be reactive, etc
       return {
         // Initialise click event from Home page (activePage with index 0 is our Home page link)
         activePage: 0,
-        pages: [
-          {
-            link: { text: "Home", url: "index.html" },
-            pageTitle: "Home Page",
-            content: "This is the Home page",
-          },
-          {
-            link: { text: "About", url: "about.html" },
-            pageTitle: "About Page",
-            content: "This is the About page",
-          },
-          {
-            link: { text: "Contact", url: "contact.html" },
-            pageTitle: "Contact Page",
-            content: "This is the Contact page",
-          },
-        ],
+        pages: []
       };
     },
+    methods: {
+      // Catching an information or a data ('pages') from a server
+      // res as a Response
+      async getPages() {
+        let res = await fetch('pages.json')
+        // Parse the data into JS Object
+        let data = await res.json();
+
+        this.pages = data;
+
+      }
+    }
   }
 
 </script>
