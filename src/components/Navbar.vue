@@ -4,10 +4,15 @@
             <a href="#" class="navbar-brand">My Vue</a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li v-for="(page, index) in pages" class="nav-item" :key="index">
-                    <a class="nav-link" :class="{active: activePage == index}" aria-current="page" :href="page.link.url"
+                    <!-- This is a component whose only purpose is to display a single link -->
+                    <navbar-link
+                    :page="page"
+                    :isActive ="activePage === index"
+                    ></navbar-link>
+                    <!-- <a class="nav-link" :class="{active: activePage == index}" aria-current="page" :href="page.link.url"
                         :title="`This link goes to the ${page.link.text} page`"
                         @click.prevent="navLinkClick(index)">{{page.link.text}}
-                    </a>
+                    </a> -->
                 </li>
             </ul>
             <form action="" class="d-flex">
