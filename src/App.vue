@@ -9,7 +9,7 @@
  <!-- v-if - to see if the pages array is not empty -->
  <!-- if it is true, than page viewer gets output into a document , otherwise it won't be in a document at all-->
  <!-- v-show does the same thing as v-if but only with css -->
- <!-- v-show is still in the document , even though it is hidden by css - kind of lik eopacity while v-if is kind of display: block/none -->
+ <!-- v-show is still in the document , even though it is hidden by css - kind of lik opacity while v-if is kind of display: block/none -->
  <page-viewer
  v-if="pages.length > 0"
  :page="pages[activePage]"
