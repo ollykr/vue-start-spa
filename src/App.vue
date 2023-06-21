@@ -1,4 +1,6 @@
 <!-- Note : Pages is a data we want dynamically load -->
+<!-- Chapter 4, lesson 3: Loading Data -->
+<!-- To decide how to load a data. Criterias: 1. Is it going to be used in multiple components or 2. in a single component -->
 <template>
  <navbar
   			:pages="pages"
@@ -29,6 +31,7 @@ export default
     },
     // Lifecycle events
     // 'created' option or "hook"
+    // We loaded components in a 'created' hook because we want to load data as soon as possible before components loaded as the data used in multiple components
     created() {
       this.getPages();
     },

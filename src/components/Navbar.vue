@@ -31,6 +31,10 @@ export default {
     components: {
         NavbarLink,
     },
+    // the created() method is used to perform an action immediately after the component is created.
+    created() {
+        this.getThemeSetting();
+    },
     props: ["pages", "activePage", "navLinkClick"],
     data() {
         return {
@@ -44,7 +48,21 @@ export default {
                 theme = "dark";
             }
             this.theme = theme;
+            this.storeThemeSetting();
         },
+        // Load data here as it is specific to this component, it saves users' settings re: navbar theme to a localStorage
+        storeThemeSetting() {
+            // the key is "theme", the data/value is whatever is inside the "this.theme"
+localStorage.setItem('theme', this.theme)
+        },
+                getThemeSetting() {
+                    let theme = localStorage.getItem('theme');
+                    // Checking if the value exists in a localStorage
+                    if (theme) {
+                        this.theme = theme;
+                    }
+        }
+
     },
 }
 </script>
