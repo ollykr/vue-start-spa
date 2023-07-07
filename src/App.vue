@@ -12,22 +12,31 @@
  <!-- if it is true, than page viewer gets output into a document , otherwise it won't be in a document at all-->
  <!-- v-show does the same thing as v-if but only with css -->
  <!-- v-show is still in the document , even though it is hidden by css - kind of like opacity while v-if is kind of display: block/none -->
- <page-viewer
+ <!-- <page-viewer
  v-if="pages.length > 0"
  :page="pages[activePage]"
  ></page-viewer>
-</template>
+-->
 
+<!-- Create a new page object inside another component -->
+<!-- "pageCreated" is a method -->
+<create-page
+:page-created="pageCreated"
+></create-page>
+
+</template>
 <script>
 import Navbar from './components/Navbar.vue';
 import PageViewer from './components/PageViewer.vue';
+import CreatePage from './components/CreatePage.vue';
 
 export default
   {
     // Use PageViewer component
     components: {
       Navbar,
-      PageViewer
+      PageViewer,
+      CreatePage
     },
     // Lifecycle events
     // 'created' option or "hook"
@@ -54,6 +63,9 @@ export default
 
         this.pages = data;
 
+      },
+      pageCreated(pageObj) {
+        console.log(pageObj);
       }
     }
   }
