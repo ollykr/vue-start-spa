@@ -73,6 +73,7 @@
 export default {
     props: ['pageCreated'],
     // for visual cues error validation
+    // computed property doesn't change a state, it uses existing data, it doesn't mutate anything at all, it computes a value and returns it
     computed: {
         isFormInvalid() {
             // return true if none of the fields are filled
@@ -113,10 +114,21 @@ export default {
             this.linkText = '';
             this.linkUrl = '';
             this.published = true;
-
-
         }
 
+    },
+    // Watch aápage title because that's what uysers want to type (linkText would be replicated based on page title typed so users don't have to type the same text in 2 different fields)
+    // This watcher is going to be executed if page title changes to give us an access to a new title value
+    // unlike computed property, the watcher watches a propery to change, it gives us ability to make changes to our state
+    watch: {
+        pageTitle(newTitle, oldTitle) {
+            // see if a link text equals an oldTitle
+            // if it is, then we know that a user didn't change a link text and we can update a link text to be the same as a new title
+            if (this.linkText === oldTitle )  {
+                this.linkText = newTitle;
+            }
+
+}
     }
 }
 </script>
