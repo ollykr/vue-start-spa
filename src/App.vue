@@ -1,6 +1,7 @@
 <!-- Note : Pages is a data we want dynamically load -->
 <!-- Chapter 4, lesson 3: Loading Data -->
 <!-- To decide how to load a data. Criterias: 1. Is it going to be used in multiple components or 2. in a single component -->
+<!-- Chapter 4 , Lesson 6 - if Published checkbox is checked, the added page is displayed in a navbar -->
 <template>
  <navbar
   			:pages="pages"
@@ -65,7 +66,8 @@ export default
 
       },
       pageCreated(pageObj) {
-        console.log(pageObj);
+        // Add page object (whatever typed in createPage component's fields) to pages array to display those in a navbar
+        this.pages.push(pageObj);
       }
     }
   }

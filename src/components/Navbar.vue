@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <a href="#" class="navbar-brand">My Vue</a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li v-for="(page, index) in pages" class="nav-item" :key="index">
+                <li v-for="(page, index) in publishedPages" class="nav-item" :key="index">
                     <!-- This is a component whose only purpose is to display a single link -->
                     <navbar-link
                     :page="page"
@@ -34,6 +34,15 @@ export default {
     // the created() method is used to perform an action immediately after the component is created.
     created() {
         this.getThemeSetting();
+    },
+    // to filter page creating/published data
+    computed: {
+        publishedPages() {
+            // return an array that only has published versions via filter() method
+            // if it is true, than this elemenţin the array will be in a new filtered array
+            return this.pages.filter(p => p.published);
+
+}
     },
     props: ["pages", "activePage", "navLinkClick"],
     data() {
