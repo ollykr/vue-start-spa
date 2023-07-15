@@ -22,7 +22,7 @@
 <!-- Create a new page object inside another component -->
 <!-- "pageCreated" is a method -->
 <create-page
-:page-created="pageCreated"
+@page-created="pageCreated"
 ></create-page>
 
 </template>

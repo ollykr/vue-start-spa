@@ -67,11 +67,27 @@
 </div>
 
 </template>
-
+<!-- Chapter 5, lesson 1 - DOM events vs custom events -->
 <script>
 // Simple prop definitions
 export default {
-    props: ['pageCreated'],
+    // to declare an event, use an emit option
+    // 'pageCreated' is a name of the event we are emitting from this component
+    // an emits property is an Object to performe validation
+    emits: {
+        pageCreated(pageObj) {
+// Validate the payload
+// Check if the page title is not there, then return false - it has to have a page title
+// It works only with return false as well but Vue dev tool returns warning that validation failed
+            return false;
+//             if (!pageObj.pageTitle) {
+//                 return false;
+// }
+
+}
+
+
+    },
     // for visual cues error validation
     // computed property doesn't change a state, it uses existing data, it doesn't mutate anything at all, it computes a value and returns it
     computed: {
@@ -98,8 +114,11 @@ export default {
                 alert('Please fill the form.');
                 return;
             }
-// if do have all the data, then we pass in the object that has pageTitle, content, etc
-            this.pageCreated({
+// Emited event, $ means it is public property
+// It is something that's encouraged to use inside of our components
+// We want to emit an event called 'pageCreated' with an argument which is an object that's created
+
+            this.$emit('pageCreated', {
                 pageTitle: this.pageTitle,
                 content: this.content,
                 link: {
@@ -108,6 +127,8 @@ export default {
                 },
                 published: this.published
             });
+
+            // this.pageCreated();
 // Clear the page adding form/clear values/back to the original form
             this.pageTitle = '';
             this.content = '';
