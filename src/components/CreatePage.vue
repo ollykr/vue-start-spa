@@ -75,14 +75,20 @@ export default {
     // 'pageCreated' is a name of the event we are emitting from this component
     // an emits property is an Object to performe validation
     emits: {
-        pageCreated(pageObj) {
-// Validate the payload
-// Check if the page title is not there, then return false - it has to have a page title
-// It works only with return false as well but Vue dev tool returns warning that validation failed
-            return false;
-//             if (!pageObj.pageTitle) {
-//                 return false;
-// }
+        // you don't have to declare and validate your events but is is useful along the way
+        pageCreated({ pageTitle, content, link}) {
+            // return false if we don't have pageTitle
+            if (!pageTitle) {
+                return false;
+            }
+            if (!content) {
+                return false;
+            }
+            if (!link || !link.text || !link.url) {
+                return false;
+            }
+            // if everything else passes , we return true
+            return true;
 
 }
 
