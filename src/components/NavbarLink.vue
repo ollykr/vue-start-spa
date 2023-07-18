@@ -1,17 +1,24 @@
 <template>
+    <!-- the only component that needs to listen to click custom emit is app.vue , the top component-->
+    <!-- $bus is a propeerty created in app.vue to use emit globally from any component -->
+
+    <li>
+        <!-- navbarLinkActivated is more specific name than 'activated' since we are using a global $bus property -->
     <a
        class="nav-link"
        :class="{ active: activePage == index }"
        aria-current="page"
        :href="page.link.url"
-       :title="`This link goes to the ${page.link.text} page`">
+       :title="`This link goes to the ${page.link.text} page`"
+       @click.prevent="$bus.$emit('navbarLinkActivated', index)">
        {{ page.link.text }}
     </a>
+    </li>
 </template>
 
 <script>
 export default {
-    props: ['page', 'isActive'],
+    props: ['page', 'index', 'isActive'],
     computed: {
         // We want to apply multiple css classes with a navbar link
         activeClasses() {
