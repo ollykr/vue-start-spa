@@ -1,32 +1,25 @@
 <!-- Note : Pages is a data we want dynamically load -->
-<!-- Chapter 5, lesson 2 - writing global event bus. Emitted components events are not bubbled -->
-<!-- In other words, emitted events are not automatically captured by parent components or higher-level components unless explicitly handled. -->
-<!--  it is listeneď to only by an immediate component, not by a parent ???-->
-<!-- To make emitted events accessible to higher-level components, you need to explicitly listen for and handle those events in each component within the hierarchy. This allows for more explicit and controlled communication between components. -->
-<!-- Before Vue 3 we used global event bus for that ,it enables us to listent to events GLOBALLY -->
-<!--  It can emit events from any components and pass them on to any other components -->
+<!-- Chapter 6, lesson 1 - Vue Router is going to router URLs to components -->
 <template>
-  <!-- listen to nav-link-click -->
  <navbar
   			:pages="pages"
   			:active-page="activePage"
   		>
  </navbar>
- <!-- v-if - to see if the pages array is not empty -->
- <!-- if it is true, than page viewer gets output into a document , otherwise it won't be in a document at all-->
- <!-- v-show does the same thing as v-if but only with css -->
- <!-- v-show is still in the document , even though it is hidden by css - kind of like opacity while v-if is kind of display: block/none -->
- <page-viewer
+
+<!-- Placeholder whenever router navigates user to a page, it gets displayed here -->
+<router-view>
+
+</router-view>
+  <!-- Router now loads these 2 components  //-->
+<!-- <page-viewer
  v-if="pages.length > 0"
  :page="pages[activePage]"
  ></page-viewer>
 
-
-<!-- Create a new page object inside another component -->
-<!-- "pageCreated" is a method -->
-<create-page
+ <create-page
 @page-created="pageCreated"
-></create-page>
+></create-page> -->
 
 </template>
 <script>

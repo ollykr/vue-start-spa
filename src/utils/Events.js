@@ -17,7 +17,7 @@ export default {
 		events.get(eventName).push(fn);
 	},
 	// Remove an event - we can implement it later
-	// for now it would trow an error
+	// for now it would throw an error
 	$off(eventName, fn) {
 		throw { message: "Not implemented" };
 	},
