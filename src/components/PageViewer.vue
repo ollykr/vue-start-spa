@@ -9,11 +9,19 @@
 export default {
     created() {
         this.page = this.$pages.getSinglePage(this.$route.params.index);
+        // first param - what params to whatc and second param is when the params to watch
+        this.$watch(() => this.$route.params, (newParams, prevParams) => {
+            this.page = this.$pages.getSinglePage(newParams.index);
+        });
     },
     data() {
         return {
             page: null
         };
+    },
+    // set up a watcher to watch page params changing to display specific page accordingly (Home, About etc)
+    watch: {
+
     }
 }
 </script>
