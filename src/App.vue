@@ -8,9 +8,7 @@
  </navbar>
 
 <!-- Placeholder whenever router navigates user to a page, it gets displayed here -->
-<router-view>
-
-</router-view>
+<router-view></router-view>
   <!-- Router now loads these 2 components  //-->
 <!-- <page-viewer
  v-if="pages.length > 0"

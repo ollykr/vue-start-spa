@@ -3,8 +3,15 @@
     <!-- $bus is a propeerty created in app.vue to use emit globally from any component -->
 
     <li>
-        <!-- navbarLinkActivated is more specific name than 'activated' since we are using a global $bus property -->
-    <a
+  <router-link
+                :to="`/${index}`"
+                class="nav-link"
+                :class="activeClasses"
+                aria-current="page"
+
+                :title="`This link goes to the ${page.link.text} page`"
+            >{{ page.link.text }}</router-link >
+        <!-- <a
        class="nav-link"
        :class="{ active: activePage == index }"
        aria-current="page"
@@ -12,7 +19,7 @@
        :title="`This link goes to the ${page.link.text} page`"
        @click.prevent="$bus.$emit('navbarLinkActivated', index)">
        {{ page.link.text }}
-    </a>
+    </a> -->
     </li>
 </template>
 
