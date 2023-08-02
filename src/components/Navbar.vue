@@ -10,15 +10,12 @@
                     v-for="(page, index) in publishedPages" class="nav-item" :key="index"
                     :page="page"
                     :index="index"
-                    :isActive ="activePage === index"
-                    @acivated="$emit('actived')"
-
                     ></navbar-link>
                     <li>
                         <router-link
                             to="/create"
                             class="nav-link"
-
+                            active-class="active"
                             aria-current="page"
 
 
@@ -43,6 +40,8 @@ export default {
     // the created() method is used to perform an action immediately after the component is created.
     created() {
         this.getThemeSetting();
+
+        this.pages = this.$pages.getAllPages();
     },
     // to filter page creating/published data
     computed: {
@@ -53,10 +52,10 @@ export default {
 
 }
     },
-    props: ["pages", "activePage"],
     data() {
         return {
             theme: "light",
+            data: []
         };
     },
     methods: {
