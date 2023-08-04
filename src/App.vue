@@ -1,13 +1,10 @@
-<!-- Note : Pages is a data we want dynamically load -->
-<!-- Chapter 6, lesson 1 - Vue Router is going to router URLs to components -->
 <template>
-  <!-- data is now centralized so <navbar> can load the dat itself -->
+  <!-- data is now centralized so <navbar> can load the data itself -->
  <navbar>
  </navbar>
-
 <!-- Placeholder whenever router navigates user to a page, it gets displayed here -->
 <router-view></router-view>
-  <!-- Router now loads these 2 components  //-->
+<!-- Router now loads these 2 components  //-->
 <!-- <page-viewer
  v-if="pages.length > 0"
  :page="pages[activePage]"
