@@ -37,6 +37,8 @@ export default {
     components: {
         NavbarLink,
     },
+    // to access /view/pages
+    inject: ['$pages'],
     // the created() method is used to perform an action immediately after the component is created.
     created() {
         this.getThemeSetting();

@@ -16,7 +16,13 @@ app.use(router);
 // $bus here is again can be called whatever we want
 // So now every component can use $bus property wherever it requires to
 app.config.globalProperties.$bus = $bus;
-app.config.globalProperties.$pages = $pages;
+// app.config.globalProperties.$pages = $pages;
+
+// The best way to pass a data from a parent to a child is via props but Pages are not a child, it is simply a view, a page to navigate to so we use a page object instead
+
+// the below code "provides" access to pages (in any child components) from an app, a parent component so it is a global property as well in this sense. We have to inject it in each component that needs access to $pages (e.g PageViewer.vue)
+// key/value pair
+app.provide("$pages", $pages);
 
 // Mount the App
 app.mount("#app");

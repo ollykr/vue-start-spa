@@ -9,6 +9,9 @@
 export default {
     // define a prop for params watcher
     props: ['index'],
+    // to access /view/pages
+    inject: ['$pages'],
+
     created() {
         this.page = this.$pages.getSinglePage(this.$route.params.index);
         // First way of setting up a watcher - programmatically
