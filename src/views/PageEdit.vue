@@ -1,9 +1,10 @@
 <template>
-    edit {{ props.index}}
+    edit {{ route.params.index}}
 </template>
 <!-- get params for edit view -->
 <script setup>
-// Define props to set params with built-in defineProps function
+// import useRoute function
+import { useRoute } from "vue-router";
+const route = useRoute();
 
-const props = defineProps(['index']);
 </script>
