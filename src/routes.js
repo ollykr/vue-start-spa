@@ -5,6 +5,7 @@ import PageViewer from "./views/PageViewer";
 import CreatePage from "./views/CreatePage";
 import Pages from "./views/Pages";
 import PagesList from "./views/PagesList";
+import PageEdit from "./views/PageEdit";
 
 // Create our router
 // Since we are using router , we can't really use props , all the date would be coming via URL, not from a parent component
@@ -26,6 +27,8 @@ const router = createRouter({
 				{ path: "", component: PagesList },
 				// Pages' Create child route
 				{ path: "create", component: CreatePage },
+				// set edit params as props
+				{ path: ":index/edit", component: PageEdit, props: true },
 			],
 		},
 	],
