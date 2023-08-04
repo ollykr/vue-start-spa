@@ -12,4 +12,11 @@ export default {
 	getSinglePage(index) {
 		return pagesStore[index];
 	},
+
+	editPage(index, page) {
+		// Update pagesStore array so at a given index we have a page object
+		pagesStore[index] = page;
+
+		localStorage.setItem(pagesKey, JSON.stringify(pagesStore));
+	},
 };
