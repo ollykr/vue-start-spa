@@ -36,14 +36,6 @@
                 v-model="linkText"
                 >
             </div>
-            <div class="mb-3">
-                <label for="" class="form-label">
-                    Link URL
-                </label>
-                <input type="text" class="form-control"
-                v-model="linkUrl"
-                >
-            </div>
             <div class="row mb-3">
                 <div class="form-check">
                     <input id="gridCheck1" class="form-check-input" type="checkbox" v-model="published">
@@ -102,12 +94,12 @@ function submitForm() {
 
 // Create a new Page object
     let newPage = {
-        pageTitle,
-        content,
+        pageTitle: pageTitle.value,
+        content: content.value,
         link: {
-            text: linkText,
+            text: linkText.value,
         },
-        published
+        published: published.value,
     };
 // Pass a new Page object to pages as addPage method's parameter
     pages.addPage(newPage);
@@ -129,8 +121,8 @@ const isFormInvalid = computed(() => !pageTitle || !content || !linkText);
 watch(pageTitle, (newTitle, oldTitle) => {
     // see if a link text equals an oldTitle
     // if it is, then we know that a user didn't change a link text and we can update a link text to be the same as a new title
-    if (linkText === oldTitle) {
-        linkText = newTitle;
+    if (linkText.value === oldTitle) {
+        linkText.value = newTitle;
     }
 
 });

@@ -47,12 +47,10 @@ export default {
 
         // event listener for a page update
         this.$bus.$on('page-updated', () => {
-            // Update pages with a new pages
-            // But the below doesn't work as individual items in the getAllPages array changes but not the array itself
-            // this.pages = this.$pages.getAllPages();
-            // We have to create a new array (via spread operator ...) for the above to work - we spread out getAllPages array
-            // so we create a new array that is populated with items from getAllPages array
-            // When the update occurs, there is going to be a new array
+            this.pages = [...this.$pages.getAllPages()];
+
+        });
+        this.$bus.$on('page-created', () => {
             this.pages = [...this.$pages.getAllPages()];
 
         });
