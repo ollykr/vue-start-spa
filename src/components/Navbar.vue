@@ -54,6 +54,10 @@ export default {
             this.pages = [...this.$pages.getAllPages()];
 
         });
+        this.$bus.$on('page-deleted', () => {
+            this.pages = [...this.$pages.getAllPages()];
+
+        });
     },
     // to filter page creating/published data
     computed: {

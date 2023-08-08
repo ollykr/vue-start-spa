@@ -63,9 +63,13 @@
                     @click.prevent="submit"
                 >Edit</button>
                 <button
-                    class="btn btn-secondary"
+                    class="btn btn-secondary me-2"
                     @click.prevent="goToPagesList"
                 >Cancel</button>
+                <button
+                    class="btn btn-danger"
+                    @click.prevent="deletePage"
+                >Delete</button>
             </div>
         </form>
 
@@ -97,6 +101,16 @@ function submit() {
     });
 
     goToPagesList();
+}
+
+function deletePage() {
+    pages.removePage(index);
+// Tell the rest of the pages that a page was deleted. In this case it is only the navbar component
+    bus.$emit('page-deleted', { index });
+
+    // Go to Pages List after you deleted a page
+    goToPagesList();
+
 }
 
 function goToPagesList() {
