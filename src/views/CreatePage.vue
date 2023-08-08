@@ -67,95 +67,73 @@
 </div>
 
 </template>
-<!-- Chapter 5, lesson 1 - DOM events vs custom events -->
-<script>
-// Simple prop definitions
-export default {
-    // to declare an event, use an emit option
-    // 'pageCreated' is a name of the event we are emitting from this component
-    // an emits property is an Object to performe validation
-    emits: {
-        // you don't have to declare and validate your events but is is useful along the way
-        pageCreated({ pageTitle, content, link}) {
-            // return false if we don't have pageTitle
-            if (!pageTitle) {
-                return false;
-            }
-            if (!content) {
-                return false;
-            }
-            if (!link || !link.text || !link.url) {
-                return false;
-            }
-            // if everything else passes , we return true
-            return true;
 
-}
+<!-- Define our scripts -->
+<script setup>
+import { inject, ref, computed, watch } from 'vue';
+import { useRouter } from 'vue-router';
+// to interact with our pageStore
+const pages = inject('$pages');
 
+const bus = inject('$bus');
 
-    },
-    // for visual cues error validation
-    // computed property doesn't change a state, it uses existing data, it doesn't mutate anything at all, it computes a value and returns it
-    computed: {
-        isFormInvalid() {
-            // return true if none of the fields are filled
-            return !this.pageTitle || !this.content || !this.linkText || !this.linkUrl;
-        }
-    },
-    data() {
-        return {
-            pageTitle: '',
-            content: '',
-            linkText: '',
-            linkUrl: '',
-            published: true
-        }
-    },
-    methods: {
-        // we don't need to add any external data such as an event object (e) e.g submitForm(e) because all the data we need is in data() function, e.g pageTitle, content, etc.
-        submitForm() {
-            // make sure we have some values
-            // if one of these values is missing , we can't create the object
-            if (!this.pageTitle || !this.content || !this.linkText || !this.linkUrl) {
-                alert('Please fill the form.');
-                return;
-            }
-// Emited event, $ means it is public property
-// It is something that's encouraged to use inside of our components
-// We want to emit an event called 'pageCreated' with an argument which is an object that's created
+const router = useRouter();
 
-            this.$emit('pageCreated', {
-                pageTitle: this.pageTitle,
-                content: this.content,
-                link: {
-                    text: this.linkText,
-                    url: this.linkUrl
-                },
-                published: this.published
-            });
+let pageTitle = ref('');
+let content = ref('');
+let linkText = ref('');
+let linkUrl = ref('');
+let published = ref(true);
 
-            // this.pageCreated();
-// Clear the page adding form/clear values/back to the original form
-            this.pageTitle = '';
-            this.content = '';
-            this.linkText = '';
-            this.linkUrl = '';
-            this.published = true;
-        }
+// we don't need to use 'this' since we are using a simple vars (let)
 
-    },
-    // Watch aápage title because that's what uysers want to type (linkText would be replicated based on page title typed so users don't have to type the same text in 2 different fields)
-    // This watcher is going to be executed if page title changes to give us an access to a new title value
-    // unlike computed property, the watcher watches a propery to change, it gives us ability to make changes to our state
-    watch: {
-        pageTitle(newTitle, oldTitle) {
-            // see if a link text equals an oldTitle
-            // if it is, then we know that a user didn't change a link text and we can update a link text to be the same as a new title
-            if (this.linkText === oldTitle )  {
-                this.linkText = newTitle;
-            }
-
-}
+function submitForm() {
+    // make sure we have some values
+    // if one of these values is missing , we can't create the object
+    if (!pageTitle || !content || !linkText) {
+        alert('Please fill the form.');
+        return;
     }
+    // Emited event, $ means it is public property
+    // It is something that's encouraged to use inside of our components
+    // We want to emit an event called 'pageCreated' with an argument which is an object that's created
+
+// Add pages to a dataStore
+
+// Create a new Page object
+    let newPage = {
+        pageTitle,
+        content,
+        link: {
+            text: linkText,
+        },
+        published
+    };
+// Pass a new Page object to pages as addPage method's parameter
+    pages.addPage(newPage);
+
+    // page-created and not pageCreated to re-use formatting used for edit page
+    bus.$emit('page-created', newPage);
+
+    router.push({ path: '/pages' });
 }
+
+// Create a var with the same name as a prop we use in Options API
+// We call in a computed function that accepts a callback function that checks the values of a form
+const isFormInvalid = computed(() => !pageTitle || !content || !linkText);
+
+// A Watcher
+// Watches pageTitle value
+// whatever we are watching has to be reactive i.e using "ref"
+// as an argument we pass in a callback function which executes whenever pageTitle value changes
+watch(pageTitle, (newTitle, oldTitle) => {
+    // see if a link text equals an oldTitle
+    // if it is, then we know that a user didn't change a link text and we can update a link text to be the same as a new title
+    if (linkText === oldTitle) {
+        linkText = newTitle;
+    }
+
+});
+
 </script>
+
